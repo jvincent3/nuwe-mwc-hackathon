@@ -1,6 +1,6 @@
 import React from 'react'
-import { Grid, GridItem } from '@chakra-ui/react'
-import {SideContent} from 'components'
+import {Box, Grid, GridItem } from '@chakra-ui/react'
+import {SideContent, Navbar} from 'components'
 
 function Layout({children}) {
     return (
@@ -9,7 +9,10 @@ function Layout({children}) {
                <SideContent/>
             </GridItem>
             <GridItem>
-                {children}
+                <Navbar/>
+                <Box py="80px">
+                    {children}
+                </Box>
             </GridItem>
         </Grid>
     )

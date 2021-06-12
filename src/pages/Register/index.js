@@ -5,7 +5,7 @@ import RegisterForm from './RegisterForm'
 
 function RegisterPage() {
     return (
-        <Box py="100px" px={{base:"0",md:"50px"}}>
+        <Box px={{base:"0",md:"50px"}}>
             <Box maxWidth="600px" mx="auto" px="10px">
                 <Box mb="5px">
                     <Heading fontSize={{base: "xl",md: "3xl"}}>Registra tu cuenta individual</Heading>
