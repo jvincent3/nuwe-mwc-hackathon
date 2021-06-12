@@ -1,11 +1,17 @@
 import React from 'react'
-import {Box} from '@chakra-ui/react'
+import { Grid, GridItem } from '@chakra-ui/react'
+import {SideContent} from 'components'
 
-function Layout() {
+function Layout({children}) {
     return (
-        <Box>
-            
-        </Box>
+        <Grid templateColumns={{base:"100%",md:"repeat(2, 1fr)"}} height="100vh">
+            <GridItem display={{base: "none", md: "initial"}}>
+               <SideContent/>
+            </GridItem>
+            <GridItem>
+                {children}
+            </GridItem>
+        </Grid>
     )
 }
 
