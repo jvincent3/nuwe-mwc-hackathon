@@ -1,7 +1,11 @@
 import React from 'react'
+import {useHistory } from 'react-router-dom' 
 import {Box, Image, Text, Grid, GridItem} from '@chakra-ui/react'
 
 function DevelopersCard() {
+
+    const history = useHistory()
+
     return (
         <Grid
             templateColumns="85px 75%"
@@ -9,7 +13,9 @@ function DevelopersCard() {
             position="relative"
             boxShadow="0px 3px 10px 0px #cfcfcf"
             borderRadius="5px"
+            cursor="pointer"
             _hover={{shadow: "none", border:"1px solid #4f934a"}}
+            onClick={e => history.push("/register")}
         >
             <GridItem>
                 <Box position="relative">
