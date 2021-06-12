@@ -1,66 +1,29 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom'
 import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert, toast, Checkbox} from '@chakra-ui/react'
 import {Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
 
-function RegisterForm() { 
+function Profile() {
 
-    function equalTo(ref, msg) {
-        return Yup.mixed().test({
-            name: 'equalTo',
-            exclusive: false,
-            message: msg || '${path} must be the same as ${reference}',
-            params: {
-                reference: ref.path
-            },
-            test: function(value) {
-                return value === this.resolve(ref);
-            }
-        })
-    }
-
-    Yup.addMethod(Yup.string, 'equalTo', equalTo)
+    const history = useHistory();
 
     return (
         <Formik
         initialValues={{
-             name: "",
-             email: "",
-             password: "",
-             terms: false
+             phone: "",
+             address: "",
+             country: "",
                          }}
         validationSchema={Yup.object({
-            name: Yup.string().required('Required'),
-            email: Yup.string().email('Invalid email adress').required('Required'),
-            password: Yup.string().min(8, 'Must have minimum 8 characters').required('Required'),
-            passwordConfirm: Yup.string().min(8, 'Must have minimum 8 characters').equalTo(Yup.ref('password'), 'Password must match').required('Required'),
-            terms: Yup.bool().oneOf([true], "Tiene que confirmar los términos y condiciones").required('Required')
+            phone: Yup.string().required('Required'),
+            address: Yup.string().required('Required'),
+            country: Yup.string().required('Required'),
         })}
         onSubmit={(values, actions) => {
-            alert(JSON.stringify(values, 2))
-          setTimeout(() => {
-            // registerFn.mutate(values, {
-            //     onSuccess: (res) => {
-            //         console.log(res)
-            //         actions.setSubmitting(false)
-            //         toast({
-            //             title: "User created",
-            //             status: "success",
-            //             isClosable: true,
-            //             duration: 5000,
-            //           })
-            //     },
-            //     onError: (err) => {
-            //         console.log(err)
-            //         actions.setSubmitting(false)
-            //         toast({
-            //             title: "User exists",
-            //             status: "error",
-            //             isClosable: true,
-            //             duration: 5000,
-            //           })
-            //     }
-            // })
+            setTimeout(() => {
+                actions.setSubmitting(false)
+                history.push("/profile")
           }, 1000)
         }}
       >
@@ -71,7 +34,7 @@ function RegisterForm() {
                         <Field name="phone">
                         {({ field, form }) => (
                             <FormControl>
-                                <FormLabel htmlFor="phone">Número de télefon*</FormLabel>
+                                <FormLabel htmlFor="phone">Número de télefono*</FormLabel>
                                 <Input height="50px" {...field} placeholder="Numero de télefono" id="phone"/>
                                 <FormErrorMessage>{form.errors.phone}</FormErrorMessage>
                             </FormControl>
@@ -95,7 +58,7 @@ function RegisterForm() {
                     </Field>
                     { props.touched.address && props.errors.address ? (
                             <Alert status="error">
-                                {props.errors.addres}
+                                {props.errors.address}
                             </Alert>
                         ): null}
                 </Box>
@@ -117,7 +80,6 @@ function RegisterForm() {
                 </Box>
                 <Button
                 mt={4}
-                disabled={!props.values.terms}
                 height="50px"
                 width="100%"
                 bg="#4f934a"
@@ -134,4 +96,4 @@ function RegisterForm() {
     )
 }
 
-export default RegisterForm;
+export default Profile;
