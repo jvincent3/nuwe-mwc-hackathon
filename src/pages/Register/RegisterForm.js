@@ -1,15 +1,20 @@
-import React from 'react'
-import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert, toast, Checkbox} from '@chakra-ui/react'
+import React, {useState} from 'react'
+import {useHistory} from 'react-router-dom'
+import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert, Flex, Checkbox} from '@chakra-ui/react'
 import {Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
 
 function RegisterForm() { 
 
+    const history = useHistory();
+    const [showPassword, setShowPassword] = useState(true)
+    const [showPassword2, setShowPassword2] = useState(true)
+
     function equalTo(ref, msg) {
         return Yup.mixed().test({
             name: 'equalTo',
             exclusive: false,
-            message: msg || '${path} must be the same as ${reference}',
+            message: msg,
             params: {
                 reference: ref.path
             },
@@ -27,6 +32,7 @@ function RegisterForm() {
              name: "",
              email: "",
              password: "",
+             passwordConfirm: "",
              terms: false
                          }}
         validationSchema={Yup.object({
@@ -37,30 +43,9 @@ function RegisterForm() {
             terms: Yup.bool().oneOf([true], "Tiene que confirmar los términos y condiciones").required('Required')
         })}
         onSubmit={(values, actions) => {
-            alert(JSON.stringify(values, 2))
-          setTimeout(() => {
-            // registerFn.mutate(values, {
-            //     onSuccess: (res) => {
-            //         console.log(res)
-            //         actions.setSubmitting(false)
-            //         toast({
-            //             title: "User created",
-            //             status: "success",
-            //             isClosable: true,
-            //             duration: 5000,
-            //           })
-            //     },
-            //     onError: (err) => {
-            //         console.log(err)
-            //         actions.setSubmitting(false)
-            //         toast({
-            //             title: "User exists",
-            //             status: "error",
-            //             isClosable: true,
-            //             duration: 5000,
-            //           })
-            //     }
-            // })
+            setTimeout(() => {
+              actions.setSubmitting(false)
+              history.push("/profile")
           }, 1000)
         }}
       >
@@ -104,7 +89,12 @@ function RegisterForm() {
                     {({ field, form }) => (
                         <FormControl>
                             <FormLabel htmlFor="password">Contranseña*</FormLabel>
-                            <Input height="50px" type="password" placeholder="Contraseña" {...field} id="password"/>
+                            <Flex>
+                                <Input height="50px" type={showPassword ? "password": "text"} placeholder="Contraseña" {...field} id="password"/>
+                                <Box position="relative">
+                                    <Button zIndex="1" _hover={{background: "none"}} height="100%" color="gray" onClick={e => {setShowPassword(!showPassword)}} position="absolute" vertical-align="middle" bg="transparent" right="0">{showPassword ? "Mostrar" : "Ocultar"}</Button>
+                                </Box>
+                            </Flex>
                             <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                         </FormControl>
                     )}
@@ -120,7 +110,12 @@ function RegisterForm() {
                     {({ field, form }) => (
                         <FormControl>
                             <FormLabel htmlFor="passwordConfirm">Confirmar contraseña*</FormLabel>
-                            <Input height="50px"  type="password" {...field} placeholder="Confirma contraseña" id="passwordConfirm"/>
+                            <Flex>
+                                <Input height="50px" pr="80px" type={showPassword2 ? "password": "text"} {...field} placeholder="Confirma contraseña" id="passwordConfirm"/>
+                                <Box position="relative">
+                                    <Button zIndex="1" _hover={{background: "none"}} height="100%" color="gray" onClick={e => {setShowPassword2(!showPassword2)}} position="absolute" vertical-align="middle" bg="transparent" right="0">{showPassword2 ? "Mostrar" : "Ocultar"}</Button>
+                                </Box>
+                            </Flex>
                             <FormErrorMessage>{form.errors.passwordConfirm}</FormErrorMessage>
                         </FormControl>
                     )}
