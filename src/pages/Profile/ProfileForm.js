@@ -1,8 +1,11 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
-import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert, toast, Checkbox} from '@chakra-ui/react'
+import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert} from '@chakra-ui/react'
 import {Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
+// import PhoneInput from 'react-phone-input-2'
+// import 'react-phone-input-2/lib/style.css'
+import PhoneInput from 'components/Input/PhoneInput'
 
 function Profile() {
 
@@ -23,7 +26,8 @@ function Profile() {
         onSubmit={(values, actions) => {
             setTimeout(() => {
                 actions.setSubmitting(false)
-                history.push("/profile")
+                alert(JSON.stringify(values, 2))
+                //history.push("/profile")
           }, 1000)
         }}
       >
@@ -35,7 +39,7 @@ function Profile() {
                         {({ field, form }) => (
                             <FormControl>
                                 <FormLabel htmlFor="phone">Número de télefono*</FormLabel>
-                                <Input height="50px" {...field} placeholder="Numero de télefono" id="phone"/>
+                                <PhoneInput country={'es'} value={form.values.phone} onChange={phone => form.setFieldValue("phone", phone)} enableSearch={true}/>
                                 <FormErrorMessage>{form.errors.phone}</FormErrorMessage>
                             </FormControl>
                         )}
