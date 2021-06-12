@@ -1,11 +1,10 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
-import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert} from '@chakra-ui/react'
+import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert, Select} from '@chakra-ui/react'
 import {Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
-// import PhoneInput from 'react-phone-input-2'
-// import 'react-phone-input-2/lib/style.css'
 import PhoneInput from 'components/Input/PhoneInput'
+import allCountriesList from 'assets/data/allCountriesList'
 
 function Profile() {
 
@@ -26,8 +25,7 @@ function Profile() {
         onSubmit={(values, actions) => {
             setTimeout(() => {
                 actions.setSubmitting(false)
-                alert(JSON.stringify(values, 2))
-                //history.push("/profile")
+                history.push("/profile")
           }, 1000)
         }}
       >
@@ -71,7 +69,12 @@ function Profile() {
                     {({ field, form }) => (
                         <FormControl>
                             <FormLabel htmlFor="country">País de residencia</FormLabel>
-                            <Input height="50px" type="country" placeholder="Selecciona uno" {...field} id="country"/>
+                            <Select height="50px" {...field} placeholder="Selecciona uno">
+                                {allCountriesList().map((country, countryIndex)=> (
+                                    <option key={country} value={country}>{country}</option>
+                                    ))
+                                }
+                            </Select>
                             <FormErrorMessage>{form.errors.country}</FormErrorMessage>
                         </FormControl>
                     )}
