@@ -4,13 +4,13 @@ import {SideContent, Navbar} from 'components'
 
 function Layout({children}) {
     return (
-        <Grid templateColumns={{base:"100%",md:"repeat(2, 1fr)"}} height="100vh">
-            <GridItem display={{base: "none", md: "initial"}}>
+        <Grid templateColumns={{base:"100%",lg:"repeat(2, 1fr)"}} height="100vh">
+            <GridItem display={{base: "none", lg: "initial"}}>
                <SideContent/>
             </GridItem>
             <GridItem>
                 <Navbar/>
-                <Box py="80px">
+                <Box py="40px">
                     {children}
                 </Box>
             </GridItem>
