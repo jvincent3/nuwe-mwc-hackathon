@@ -1,11 +1,13 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
-import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert, toast, Checkbox} from '@chakra-ui/react'
+import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert, useDisclosure} from '@chakra-ui/react'
 import {Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
+import SuccessModal from 'components/Modal/SuccessModal'
 
 function VerifyForm() {
 
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const history = useHistory();
 
     return (
@@ -15,14 +17,13 @@ function VerifyForm() {
              secretCode: "",
                          }}
         validationSchema={Yup.object({
-            phone: Yup.string().required('Required'),
-            address: Yup.string().required('Required'),
-            country: Yup.string().required('Required'),
+            cardNumber: Yup.string().required('Required'),
+            secretCode: Yup.string().min(3, "Required 3 digits").max(3, "Max 3 digits").required('Required'),
         })}
         onSubmit={(values, actions) => {
             setTimeout(() => {
                 actions.setSubmitting(false)
-                history.push("/profile")
+                onOpen()
           }, 1000)
         }}
       >
@@ -34,7 +35,7 @@ function VerifyForm() {
                         {({ field, form }) => (
                             <FormControl>
                                 <FormLabel htmlFor="cardNumber">Número de tarjeta*</FormLabel>
-                                <Input height="50px" {...field} placeholder="Numero de tarjeta" id="cardNumber"/>
+                                <Input maxLength="12" height="50px" {...field} placeholder="Numero de tarjeta" id="cardNumber"/>
                                 <FormErrorMessage>{form.errors.cardNumber}</FormErrorMessage>
                             </FormControl>
                         )}
@@ -50,14 +51,14 @@ function VerifyForm() {
                     {({ field, form }) => (
                         <FormControl>
                             <FormLabel htmlFor="secretCode">Código secreto</FormLabel>
-                            <Input height="50px" {...field} placeholder="Codigo secreto" id="secretCode"/>
+                            <Input type="number" height="50px" {...field} placeholder="Codigo secreto" id="secretCode"/>
                             <FormErrorMessage>{form.errors.secretCode}</FormErrorMessage>
                         </FormControl>
                     )}
                     </Field>
                     { props.touched.secretCode && props.errors.secretCode ? (
                             <Alert status="error">
-                                {props.errors.address}
+                                {props.errors.secretCode}
                             </Alert>
                         ): null}
                 </Box>
@@ -70,8 +71,9 @@ function VerifyForm() {
                 isLoading={props.isSubmitting}
                 type="submit"
                 >
-                Guardar y continuar
+                Crear cuenta
                 </Button>
+                <SuccessModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
               </Box>
           </Form>
         )}

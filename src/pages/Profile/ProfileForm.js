@@ -25,7 +25,7 @@ function Profile() {
         onSubmit={(values, actions) => {
             setTimeout(() => {
                 actions.setSubmitting(false)
-                history.push("/profile")
+                history.push("/verify")
           }, 1000)
         }}
       >
