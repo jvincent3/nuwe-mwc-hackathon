@@ -4,6 +4,7 @@ import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert, Fle
 import {Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
 import UserExistsModal from 'components/Modal/UserExistsModal'
+import {verifyUser, setUser} from 'utils/user'
 
 function RegisterForm() { 
 
@@ -11,11 +12,7 @@ function RegisterForm() {
     const history = useHistory();
     const [showPassword, setShowPassword] = useState(true)
     const [showPassword2, setShowPassword2] = useState(true)
-    const storedUsers = JSON.parse(localStorage.getItem("users"))
 
-    function verifyUser(email) {
-        return storedUsers.some(person => person.email === email)
-    }
 
     function equalTo(ref, msg) {
         return Yup.mixed().test({
@@ -53,7 +50,7 @@ function RegisterForm() {
             setTimeout(() => {
             
             if (!verifyUser(values.email)) {
-                localStorage.setItem("users", JSON.stringify([...storedUsers, values]))
+                setUser(values)
                 history.push("/profile")
             } else {
                 console.log("user already exists")

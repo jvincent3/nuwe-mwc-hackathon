@@ -31,7 +31,7 @@ function Navbar() {
         return (
             <Flex display={{base: "none", lg: "flex"}} justifyContent="flex-end" p={{base: "20px 30px", md: "20px 50px"}}>
                 <Box alignSelf="center">
-                    <Text>Ya tienes cuenta? <Link color="#4f934a" fontWeight="semibold">Inicia sesión</Link></Text>
+                    <Text>Ya tienes cuenta? <Link color="#4f934a" fontWeight="semibold" href="/login">Inicia sesión</Link></Text>
                 </Box>
             </Flex>
         )

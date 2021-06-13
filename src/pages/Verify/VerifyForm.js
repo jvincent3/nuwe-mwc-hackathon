@@ -15,7 +15,7 @@ function VerifyForm() {
              secretCode: "",
                          }}
         validationSchema={Yup.object({
-            cardNumber: Yup.string().matches(/^[0-9]+$/, "Solo numeros").required('Requerido'),
+            cardNumber: Yup.string().min(12,"Requiere 12 digitos").matches(/^[0-9]+$/, "Solo numeros").required('Requerido'),
             secretCode: Yup.string().min(3, "Requiere 3 digitos").max(3, "Máximo 3 digitos").matches(/^[0-9]+$/, "Solo numeros").required('Requerido'),
         })}
         onSubmit={(values, actions) => {

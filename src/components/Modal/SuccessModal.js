@@ -20,7 +20,7 @@ function SuccessModal({isOpen, onOpen, onClose}) {
                 <Button bg="white" width="30%" color="black" variant="outline" colorScheme="blue" mr={3} onClick={onClose}>
                   Cerrar
                 </Button>
-                <Button width="70%" bg="black" color="white" variant="ghost">Vamos para nuwe</Button>
+                <Button width="70%" bg="black" color="white" variant="ghost" onClick={e => window.location = "https://nuwe.io"}>Vamos para nuwe</Button>
               </ModalFooter>
             </ModalContent>
           </Modal>
