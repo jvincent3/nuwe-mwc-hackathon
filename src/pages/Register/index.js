@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box,Flex, Text, Heading, Divider, Fade} from '@chakra-ui/react'
+import {Box,Flex, Text, Heading, Divider} from '@chakra-ui/react'
 import {GoogleRegisterBtn} from 'components'
 import RegisterForm from './RegisterForm'
 import FadeInWhenVisible from 'layout/FadeInWhenVisible'

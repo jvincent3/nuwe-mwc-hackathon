@@ -6,7 +6,7 @@ function FadeInWhenVisible({children}) {
 
     useEffect(() => {
         controls.start("visible")
-    },[])
+    },[controls])
 
     return (
         <motion.div
