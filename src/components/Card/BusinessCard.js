@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
+import {useHistory} from 'react-router-dom'
 import {Box, Image, Text, Grid, GridItem, Icon} from '@chakra-ui/react'
 import {FiBriefcase} from 'react-icons/fi'
 import {BiRightArrowAlt} from 'react-icons/bi'
 
 function BusinessCard() {
 
+    const history = useHistory()
     const [isHovered, setIsHovered] = useState(false)
 
     return (
@@ -18,6 +20,7 @@ function BusinessCard() {
             borderRadius="5px"
             cursor="pointer"
             _hover={{shadow: "none", border:"1px solid #4f934a"}}
+            onClick={e => history.push("/register")}
         >
             <GridItem>
                 <Box position="relative">
