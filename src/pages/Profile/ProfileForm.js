@@ -18,9 +18,9 @@ function Profile() {
              country: "",
                          }}
         validationSchema={Yup.object({
-            phone: Yup.string().required('Required'),
-            address: Yup.string().required('Required'),
-            country: Yup.string().required('Required'),
+            phone: Yup.string().min(6, "Introduzca un numero correcto").required('Requerido'),
+            address: Yup.string().min(6, "Introduzca una dirección correcta").required('Requerido'),
+            country: Yup.string().required('Requerido'),
         })}
         onSubmit={(values, actions) => {
             setTimeout(() => {
@@ -37,7 +37,12 @@ function Profile() {
                         {({ field, form }) => (
                             <FormControl>
                                 <FormLabel htmlFor="phone">Número de télefono*</FormLabel>
-                                <PhoneInput country={'es'} value={form.values.phone} onChange={phone => form.setFieldValue("phone", phone)} enableSearch={true}/>
+                                <PhoneInput 
+                                    country={'es'} 
+                                    value={form.values.phone} 
+                                    onChange={phone => form.setFieldValue("phone", phone)} 
+                                    enableSearch={true}
+                                />
                                 <FormErrorMessage>{form.errors.phone}</FormErrorMessage>
                             </FormControl>
                         )}

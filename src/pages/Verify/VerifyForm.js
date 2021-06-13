@@ -15,8 +15,8 @@ function VerifyForm() {
              secretCode: "",
                          }}
         validationSchema={Yup.object({
-            cardNumber: Yup.string().required('Required'),
-            secretCode: Yup.string().min(3, "Required 3 digits").max(3, "Max 3 digits").required('Required'),
+            cardNumber: Yup.string().matches(/^[0-9]+$/, "Solo numeros").required('Requerido'),
+            secretCode: Yup.string().min(3, "Requiere 3 digitos").max(3, "Máximo 3 digitos").matches(/^[0-9]+$/, "Solo numeros").required('Requerido'),
         })}
         onSubmit={(values, actions) => {
             setTimeout(() => {
@@ -49,7 +49,7 @@ function VerifyForm() {
                     {({ field, form }) => (
                         <FormControl>
                             <FormLabel htmlFor="secretCode">Código secreto</FormLabel>
-                            <Input type="number" height="50px" {...field} placeholder="Codigo secreto" id="secretCode"/>
+                            <Input maxLength="3" height="50px" {...field} placeholder="Codigo secreto" id="secretCode"/>
                             <FormErrorMessage>{form.errors.secretCode}</FormErrorMessage>
                         </FormControl>
                     )}
