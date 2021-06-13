@@ -1,70 +1,116 @@
-# Getting Started with Create React App
+# Getting started MWC Nuwe Hackathon Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the source code for MWC Nuwe Hackathon Challenge. List of pokemons which showcases each pokemon its data. This website is built on [Create-React-App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Folder structure
 
-In the project directory, you can run:
+**Structured based on file type**
 
-### `yarn start`
+### Example:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+src/
+|-- components/
+|   |-- Avatar/
+|   |   |-- Avatar.js
+|   |   |-- Avatar.test.js
+|   |-- Button/
+|   |   |-- Button.js
+|   |   |-- Button.test.js
+|   |-- TextField/
+|   |   |-- TextField.js
+|   |   |-- TextField.test.js
+|-- contexts/
+|   |-- UserContext/
+|   |   |-- UserContext.js
+|-- hooks/
+|   |-- useMediaQuery/
+|   |   |-- useMediaQuery.js
+|-- pages/
+|   |-- UserProfile/
+|   |   |-- components/
+|   |   |   |-- SomeUserProfileComponent/
+|   |   |   |   |-- SomeUserProfileComponent.js
+|   |   |   |   |-- SomeUserProfileComponent.test.js
+|   |   |-- UserProfile.js
+|   |   |-- UserProfile.test.js
+|   |-- index.js
+|-- routes/
+|   |-- routes.js
+|   |-- routes.test.js
+|-- utils/
+|   |-- some-util/
+|   |   |-- index.js
+|   |   |-- someUtil.js
+|   |   |-- index.test.js
+|-- services/
+|   |-- some-service/
+|   |   |-- index.js/
+|   |   |-- someService.js/
+|   |   |-- index.test.js
+|-- App.js
+|-- index.js
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Learn more
 
-### `yarn test`
+To be more familiar with the libraries I have mainly used I will leave a small explanation here:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### [Chakra-UI](https://chakra-ui.com/)
 
-### `yarn build`
+Chakra UI is a simple, modular and accessible component library that gives you the building blocks you need to build your React applications.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### [React Router](https://reactrouter.com/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+React Router is a collection of navigational components that compose declaratively with your application. Whether you want to have bookmarkable URLs for your web app or a composable way to navigate in React Native, React Router works wherever React is rendering--so take your pick!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### [Formik](https://formik.org/)
 
-### `yarn eject`
+Formik is a small library that helps you with the 3 most annoying parts:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Getting values in and out of form state
+- Validation and error messages
+- Handling form submission
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+By colocating all of the above in one place, Formik will keep things organized--making testing, refactoring, and reasoning about your forms a breeze.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### [Yup](https://github.com/jquense/yup)
 
-## Learn More
+Yup is a JavaScript schema builder for value parsing and validation. Define a schema, transform a value to match, validate the shape of an existing value, or both. Yup schema are extremely expressive and allow modeling complex, interdependent validations, or value transformations.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+In order to contribute I recomend to check undestand a bit about the Folder structure and the libraries mentioned on top. It is important since you'll be encountering most of the components are created using Chakra-UI styles, Forms with formik and validations with Yup.
 
-### Code Splitting
+It is important to keep the code simple and tiny in order to not struggle refactoring mistakes and headachese when reading the code.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Getting Started
 
-### Analyzing the Bundle Size
+### Prerequisities
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+-   Git
+-   [Node](https://nodejs.org/en/): 10.16.0 or greater
+-   A GitHub fork of the repo (for any contributions)
+-   A clone of the [MWC Nuwe Hackathon repo](https://github.com/jvincent3/nuwe-mwc-hackathon) on your local machine
 
-### Making a Progressive Web App
+### Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. `cd nuwe-mwc-hackathon` to go into the project root.
+2. `npm install` to install project dependencies.
 
-### Advanced Configuration
+### Running locally
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. `npm run start` to start the hot-reloading development server (powered by [Create-React-App](https://github.com/facebook/create-react-app)).
+2. Go to `http://localhost:3000` to view the site in your browser.
 
-### Deployment
+### Building for production
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. `npm run build` to build the production site.
+2. `npm run serve` to serve the production version of the site on a local test server.
 
-### `yarn build` fails to minify
+Production files are located in the `dist` directory.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Happy coding!
+
