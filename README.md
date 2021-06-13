@@ -6,6 +6,10 @@ This repository contains the source code for MWC Nuwe Hackathon Challenge. List 
 
 **Structured based on file type**
 
+## Live preview
+
+[Click here to see live preview](https://hackathon-mwc-nuwe-jvincent3.vercel.app/)
+
 ### Example:
 
 ```
