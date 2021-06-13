@@ -1,8 +1,14 @@
+import React, {useEffect} from 'react'
 import Layout from 'layout'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import {HomePage, RegisterPage, ProfilePage, VerifyPage} from 'pages'
 
 function App() {
+
+    useEffect(() => {
+        if (localStorage.getItem("users") === null)
+            localStorage.setItem("users", JSON.stringify([]))
+    })
 
   return (
     <Router>

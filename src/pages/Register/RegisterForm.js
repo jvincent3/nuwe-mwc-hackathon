@@ -1,14 +1,22 @@
 import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
-import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert, Flex, Checkbox} from '@chakra-ui/react'
+import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert, Flex, Checkbox, useDisclosure} from '@chakra-ui/react'
 import {Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
+import UserExistsModal from 'components/Modal/UserExistsModal'
 
 function RegisterForm() { 
 
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const history = useHistory();
     const [showPassword, setShowPassword] = useState(true)
     const [showPassword2, setShowPassword2] = useState(true)
+    const storedUsers = JSON.parse(localStorage.getItem("users"))
+
+    function verifyUser(email) {
+
+        return storedUsers.some(person => person.email === email)
+    }
 
     function equalTo(ref, msg) {
         return Yup.mixed().test({
@@ -34,7 +42,7 @@ function RegisterForm() {
              password: "",
              passwordConfirm: "",
              terms: false
-                         }}
+            }}
         validationSchema={Yup.object({
             name: Yup.string().required('Required'),
             email: Yup.string().email('Invalid email adress').required('Required'),
@@ -44,8 +52,15 @@ function RegisterForm() {
         })}
         onSubmit={(values, actions) => {
             setTimeout(() => {
-              actions.setSubmitting(false)
-              history.push("/profile")
+            
+            if (!verifyUser(values.email)) {
+                localStorage.setItem("users", JSON.stringify([...storedUsers, values]))
+                history.push("/profile")
+            } else {
+                console.log("user already exists")
+                onOpen()
+            }
+            actions.setSubmitting(false)
           }, 1000)
         }}
       >
@@ -148,6 +163,7 @@ function RegisterForm() {
                 >
                 Registra cuenta
                 </Button>
+                <UserExistsModal  isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
               </Box>
           </Form>
         )}
