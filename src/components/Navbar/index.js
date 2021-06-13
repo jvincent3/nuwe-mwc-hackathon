@@ -12,15 +12,18 @@ function Navbar() {
     const pageData = {
         "register": {
             "step": "STEP 01/03",
-            "desc": "Personal info."
+            "desc": "Personal info.",
+            "prev": "/"
         },
         "profile": {
             "step": "STEP 02/03",
-            "desc": "Localización"
+            "desc": "Localización",
+            "prev": "/register"
         },
         "verify": {
             "step": "STEP 03/03",
-            "desc": "Verificación por tarjeta."
+            "desc": "Verificación por tarjeta.",
+            "prev": "/profile"
         },
     }
     
@@ -36,22 +39,22 @@ function Navbar() {
 
     return (
         <Flex justifyContent="space-between" p={{base: "20px 30px", md: "20px 50px"}}>
-            <Flex onClick={e => history.goBack()} cursor="pointer" transition=".5s" fontWeight="semibold" color="gray" _hover={{transform: "scale(1.1)"}}>
+            {pageData[locationName] &&
+            <>
+                <Flex onClick={e => history.push(pageData[locationName].prev)} cursor="pointer" transition=".5s" fontWeight="semibold" color="gray" _hover={{transform: "scale(1.1)"}}>
+                    <Box alignSelf="center">
+                        <Icon fontSize="3xl" as={MdKeyboardArrowLeft}/>
+                    </Box>
+                    <Box alignSelf="center">
+                        <Text>Volver</Text>
+                    </Box>
+                </Flex>
                 <Box alignSelf="center">
-                    <Icon fontSize="3xl" as={MdKeyboardArrowLeft}/>
+                        <Text textAlign="right" color="gray" textTransform="uppercase">{pageData[locationName].step}</Text>
+                        <Text textAlign="right" color="gray" fontWeight="semibold">{pageData[locationName].desc}</Text>
                 </Box>
-                <Box alignSelf="center">
-                    <Text>Volver</Text>
-                </Box>
-            </Flex>
-            <Box alignSelf="center">
-                {pageData[locationName] &&
-                <>
-                    <Text textAlign="right" color="gray" textTransform="uppercase">{pageData[locationName].step}</Text>
-                    <Text textAlign="right" color="gray" fontWeight="semibold">{pageData[locationName].desc}</Text>
-                </>
-                }
-            </Box>
+            </>
+            }
         </Flex>
     )
 }
