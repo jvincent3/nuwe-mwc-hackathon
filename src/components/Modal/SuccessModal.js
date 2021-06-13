@@ -1,5 +1,5 @@
 import React from 'react'
-import {useDisclosure,Heading,Text,  Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter} from '@chakra-ui/react'
+import {Heading,Text,  Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter} from '@chakra-ui/react'
 
 function SuccessModal({isOpen, onOpen, onClose}) {
 

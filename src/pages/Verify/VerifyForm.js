@@ -1,5 +1,4 @@
 import React from 'react'
-import {useHistory} from 'react-router-dom'
 import {Box, FormControl, FormLabel, Input, Button, FormErrorMessage, Alert, useDisclosure} from '@chakra-ui/react'
 import {Formik, Field, Form} from 'formik'
 import * as Yup from 'yup'
@@ -8,7 +7,6 @@ import SuccessModal from 'components/Modal/SuccessModal'
 function VerifyForm() {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const history = useHistory();
 
     return (
         <Formik
