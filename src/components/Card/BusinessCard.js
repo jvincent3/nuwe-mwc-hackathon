@@ -1,10 +1,17 @@
-import React from 'react'
-import {Box, Image, Text, Grid, GridItem} from '@chakra-ui/react'
+import React, {useState} from 'react'
+import {Box, Image, Text, Grid, GridItem, Icon} from '@chakra-ui/react'
+import {FiBriefcase} from 'react-icons/fi'
+import {BiRightArrowAlt} from 'react-icons/bi'
 
 function BusinessCard() {
+
+    const [isHovered, setIsHovered] = useState(false)
+
     return (
         <Grid
-            templateColumns="85px 75%"
+            onMouseEnter={e => setIsHovered(true)}
+            onMouseLeave={e => setIsHovered(false)}
+            templateColumns={{base: "85px 75%",lg:"85px 65% 30px"}}
             minHeight="90px"
             position="relative"
             boxShadow="0px 3px 10px 0px #cfcfcf"
@@ -21,8 +28,9 @@ function BusinessCard() {
                             transform="translate(-50%, 50%)"
                             zIndex="1"
                             loading="lazy"
-                            src={require('assets/images/MWCAssets/Polygon-3.png')?.default}/>
-                        <Image 
+                            src={require(isHovered ? 'assets/images/MWCAssets/Polygon.png': 'assets/images/MWCAssets/Polygon-3.png')?.default}
+                        />
+                        <Icon 
                             position="absolute"
                             h="20px"
                             w="20px"
@@ -32,14 +40,22 @@ function BusinessCard() {
                             mt="40px"
                             zIndex="2"
                             loading="lazy"
-                            src={require('assets/images/MWCAssets/briefcase.png')?.default}/>
+                            color={isHovered ? "white": "#4f934a"}
+                            as={FiBriefcase}
+                        />
                 </Box>
             </GridItem>
             <GridItem p="10px" alignSelf="center">
                 <Text fontSize="lg" fontWeight="semibold">Business</Text>
                 <Text color="gray" fontSize="sm">Tienes o perteneces a una compañia</Text>
             </GridItem>
-            
+            <GridItem display={{base: "none", lg: "initial"}} alignSelf="center">
+                <Icon
+                    color={isHovered ? "#4f934a" : "white"}
+                    fontSize="25px"
+                    as={BiRightArrowAlt}
+                />
+            </GridItem>
         </Grid>
     )
 }
