@@ -14,7 +14,6 @@ function RegisterForm() {
     const storedUsers = JSON.parse(localStorage.getItem("users"))
 
     function verifyUser(email) {
-
         return storedUsers.some(person => person.email === email)
     }
 
@@ -44,11 +43,11 @@ function RegisterForm() {
              terms: false
             }}
         validationSchema={Yup.object({
-            name: Yup.string().required('Required'),
-            email: Yup.string().email('Invalid email adress').required('Required'),
-            password: Yup.string().min(8, 'Must have minimum 8 characters').required('Required'),
-            passwordConfirm: Yup.string().min(8, 'Must have minimum 8 characters').equalTo(Yup.ref('password'), 'Password must match').required('Required'),
-            terms: Yup.bool().oneOf([true], "Tiene que confirmar los términos y condiciones").required('Required')
+            name: Yup.string().matches(/^[A-Za-z ]+$/, 'Introduzca un nombre valido.').required('Requerido'),
+            email: Yup.string().email('Email inválido').required('Requerido'),
+            password: Yup.string().min(8, 'Mínimo 8 characteres').required('Requerido'),
+            passwordConfirm: Yup.string().min(8, 'Mínimo 8 characteres').equalTo(Yup.ref('password'), 'Contraseña tiene que coincidir').required('Requerido'),
+            terms: Yup.bool().oneOf([true], "Tiene que confirmar los términos y condiciones").required('Requerido')
         })}
         onSubmit={(values, actions) => {
             setTimeout(() => {
@@ -71,7 +70,7 @@ function RegisterForm() {
                         <Field name="name">
                         {({ field, form }) => (
                             <FormControl>
-                                <FormLabel htmlFor="name">Nombre completo*</FormLabel>
+                                <FormLabel htmlFor="name" pattern="[A-Za-z]">Nombre completo*</FormLabel>
                                 <Input height="50px" {...field} placeholder="Nombre" id="name"/>
                                 <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                             </FormControl>
@@ -128,7 +127,19 @@ function RegisterForm() {
                             <Flex>
                                 <Input height="50px" pr="80px" type={showPassword2 ? "password": "text"} {...field} placeholder="Confirma contraseña" id="passwordConfirm"/>
                                 <Box position="relative">
-                                    <Button zIndex="1" _hover={{background: "none"}} height="100%" color="gray" onClick={e => {setShowPassword2(!showPassword2)}} position="absolute" vertical-align="middle" bg="transparent" right="0">{showPassword2 ? "Mostrar" : "Ocultar"}</Button>
+                                    <Button 
+                                        zIndex="1" 
+                                        _hover={{background: "none"}}
+                                        height="100%"
+                                        color="gray"
+                                        onClick={e => {setShowPassword2(!showPassword2)}}
+                                        position="absolute"
+                                        vertical-align="middle"
+                                        bg="transparent"
+                                        right="0"
+                                    >
+                                        {showPassword2 ? "Mostrar" : "Ocultar"}
+                                    </Button>
                                 </Box>
                             </Flex>
                             <FormErrorMessage>{form.errors.passwordConfirm}</FormErrorMessage>
@@ -152,14 +163,14 @@ function RegisterForm() {
                     </Field>
                 </Box>
                 <Button
-                mt={4}
-                disabled={!props.values.terms}
-                height="50px"
-                width="100%"
-                bg="#4f934a"
-                color="white"
-                isLoading={props.isSubmitting}
-                type="submit"
+                    mt={4}
+                    disabled={!props.values.terms}
+                    height="50px"
+                    width="100%"
+                    bg="#4f934a"
+                    color="white"
+                    isLoading={props.isSubmitting}
+                    type="submit"
                 >
                 Registra cuenta
                 </Button>
